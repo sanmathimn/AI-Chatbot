@@ -29,7 +29,7 @@ npm run dev
 
 ## 🖼️ Screenshot
 
-![Chatbot UI](./public/chatbot-ui.png)
+[![Chatbot UI](./public/chatbot-ui.png)](./public/chatbot-ui.png)
 
 ## 📄 License
 
