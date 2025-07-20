@@ -15,10 +15,7 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
 
     setChatHistory((history) => [...history, { role: "user", text: userMessage }]);
     setTimeout(() => {
-      setChatHistory((history) => [
-        ...history,
-        { role: "model", text: "Thinking..." },
-      ]);
+      setChatHistory((history) => [...history, { role: "model", text: "Thinking..." }]);
       generateBotResponse([
         ...chatHistory,
         {
@@ -34,53 +31,43 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
   };
 
   const handleFileUpload = (e) => {
-  const file = e.target.files[0];
-  if (file && file.type.startsWith("image/")) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const imageDataUrl = reader.result;
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result;
+        const imageMessage = {
+          role: "user",
+          text: (
+            <div>
+              📎 Uploaded image: <br />
+              <img
+                src={imageDataUrl}
+                alt={file.name}
+                style={{ maxWidth: "150px", borderRadius: "8px" }}
+              />
+            </div>
+          ),
+        };
 
-      // Add image to chat history
-      const imageMessage = {
-        role: "user",
-        text: (
-          <div>
-            📎 Uploaded image: <br />
-            <img src={imageDataUrl} alt={file.name} style={{ maxWidth: "150px", borderRadius: "8px" }} />
-          </div>
-        ),
-        imageData: imageDataUrl, // Optional: for logic if needed
+        setChatHistory((history) => [...history, imageMessage]);
+
+        setTimeout(() => {
+          setChatHistory((history) => [...history, { role: "model", text: "Analyzing image..." }]);
+          generateBotResponse([
+            ...chatHistory,
+            {
+              role: "user",
+              text: `Please analyze the uploaded image named \"${file.name}\"`,
+            },
+          ]);
+        }, 800);
       };
-
-      // Update chat history
-      setChatHistory((history) => [...history, imageMessage]);
-
-      // Auto-generate a bot response after showing image
-      setTimeout(() => {
-        setChatHistory((history) => [
-          ...history,
-          { role: "model", text: "Analyzing image..." },
-        ]);
-
-        generateBotResponse([
-          ...chatHistory,
-          {
-            role: "user",
-            text: `Please analyze the uploaded image named "${file.name}"`,
-          },
-        ]);
-      }, 800);
-    };
-    reader.readAsDataURL(file);
-  } else if (file) {
-    // Handle non-image files normally
-    setChatHistory((history) => [
-      ...history,
-      { role: "user", text: `📎 Uploaded file: ${file.name}` },
-    ]);
-  }
-};
-
+      reader.readAsDataURL(file);
+    } else if (file) {
+      setChatHistory((history) => [...history, { role: "user", text: `📎 Uploaded file: ${file.name}` }]);
+    }
+  };
 
   const handleVoiceInput = () => {
     if (!("webkitSpeechRecognition" in window)) {
@@ -114,34 +101,31 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
 
   return (
     <form
-      className="chat-form"
       onSubmit={handleFormSubmit}
-      style={{ display: "flex", alignItems: "center", position: "relative" }}
+      style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "10px", borderTop: "1px solid #ccc" }}
     >
       <input
         ref={inputRef}
         type="text"
         placeholder="Message..."
-        className="message-input"
+        style={{ flex: 1, padding: "10px", fontSize: "16px", borderRadius: "5px", border: "1px solid #ccc" }}
         required
       />
 
-      {/* Emoji Button */}
       <button
         type="button"
-        className="emoji-btn"
         onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-        style={{ marginLeft: "5px" }}
+        title="Emoji"
+        style={{ fontSize: "20px", cursor: "pointer", background: "none", border: "none" }}
       >
         😊
       </button>
 
-      {/* Full Emoji Picker */}
       {showEmojiPicker && (
-        <div className="emoji-picker">
+        <div style={{ position: "absolute", bottom: "60px", right: "70px", zIndex: 1000 }}>
           <EmojiPicker
             onEmojiClick={(emojiData) => {
-              inputRef.current.value += emojiData.emoji;
+              handleEmojiClick(emojiData);
               setShowEmojiPicker(false);
             }}
             emojiStyle="native"
@@ -149,21 +133,19 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
         </div>
       )}
 
-      {/* Voice Button */}
       <button
         type="button"
         onClick={handleVoiceInput}
         title="Voice Input"
-        style={{ marginLeft: "5px", cursor: "pointer" }}
+        style={{ fontSize: "20px", cursor: "pointer", background: "none", border: "none" }}
       >
         🎤
       </button>
 
-      {/* Upload File Button */}
       <label
         htmlFor="file-upload"
-        className="upload-btn"
-        style={{ marginLeft: "5px", cursor: "pointer" }}
+        title="Upload image"
+        style={{ fontSize: "20px", cursor: "pointer" }}
       >
         📎
         <input
@@ -175,12 +157,12 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
         />
       </label>
 
-      {/* Send Button */}
       <button
-        className="material-symbols-rounded"
-        style={{ marginLeft: "5px" }}
+        type="submit"
+        title="Send"
+        style={{ fontSize: "20px", cursor: "pointer", background: "none", border: "none" }}
       >
-        arrow_upward
+        ↑
       </button>
     </form>
   );
