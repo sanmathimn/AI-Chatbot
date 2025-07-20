@@ -22,10 +22,8 @@ This is an AI Chatbot built using React and Vite. It features a minimal and resp
    ```bash
    git clone https://github.com/sanmathimn/AI-Chatbot.git
    cd AI-Chatbot
-
-npm install
-
-npm run dev
+   npm install
+   npm run dev
 
 ## 🖼️ Screenshot
 
@@ -36,4 +34,4 @@ npm run dev
 
 This project is open-source and available under the [MIT License](LICENSE).
 
-<!-- Force update -->
+
