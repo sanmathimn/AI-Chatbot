@@ -29,9 +29,7 @@ npm run dev
 
 ## 🖼️ Screenshot
 
-[![Chatbot UI](https://raw.githubusercontent.com/sanmathimn/AI-Chatbot/main/chatbot-ui.png)](https://raw.githubusercontent.com/sanmathimn/AI-Chatbot/main/chatbot-ui.png)
-
-
+[![Chatbot UI](https://i.postimg.cc/QdXfT4y3/chatbot-ui.png)](https://i.postimg.cc/QdXfT4y3/chatbot-ui.png)
 
 ## 📄 License
 
