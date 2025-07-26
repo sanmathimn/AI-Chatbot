@@ -61,6 +61,9 @@ AI-Chatbot/
 ├── .gitignore                   # Ignored files for Git
 └── README.md                    # Project documentation
 
+## 🔗 Demo Video
+
+🎥 [Click here to watch the project demo on LinkedIn](https://www.linkedin.com/posts/sanmathi-m-n-300190373_ai-chatboot-machinelearning-activity-7353047018681888768-2b2O?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFxllrAB2mP6usCdZraySPtZAqF6EL0J9c0)
 
 ## 📄 License
 
