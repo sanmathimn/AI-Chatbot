@@ -31,6 +31,10 @@ Web Speech API (for voice input)
    npm run dev
    The app will run at http://localhost:5173
 
+## 🔗 Demo Video
+
+🎥 [Click here to watch the project demo on LinkedIn](https://www.linkedin.com/posts/sanmathi-m-n-300190373_ai-chatboot-machinelearning-activity-7353047018681888768-2b2O?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFxllrAB2mP6usCdZraySPtZAqF6EL0J9c0)
+
 ## 🖼️ Screenshot
 
 [![Chatbot UI](https://raw.githubusercontent.com/sanmathimn/AI-Chatbot/main/chatbot-ui.png)](https://raw.githubusercontent.com/sanmathimn/AI-Chatbot/main/chatbot-ui.png)
